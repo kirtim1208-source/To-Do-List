@@ -1,12 +1,13 @@
 
 import { useState } from "react";
-import "./App.css";
+import "./index.css";
 
 function App() {
 
     const [task, setTask] = useState("");
     const [tasks, setTasks] = useState([]);
 
+    // Add Task
     function addTask() {
 
         if (task.trim() === "") {
@@ -23,13 +24,17 @@ function App() {
         setTask("");
     }
 
+    // Delete Task
     function deleteTask(id) {
 
-        const newTasks = tasks.filter((item) => item.id !== id);
+        const newTasks = tasks.filter(
+            (item) => item.id !== id
+        );
 
         setTasks(newTasks);
     }
 
+    // Complete Task
     function completeTask(id) {
 
         const newTasks = tasks.map((item) => {
@@ -68,6 +73,7 @@ function App() {
             </div>
 
             <ul>
+
                 {tasks.map((item) => (
 
                     <li key={item.id}>
@@ -79,24 +85,17 @@ function App() {
                             {item.name}
                         </span>
 
-                        <div className="buttons">
-
-                            <button onClick={() => completeTask(item.id)}>
-                                {item.completed ? "Undo" : "Done"}
-                            </button>
-
-                            <button
-                                className="delete-btn"
-                                onClick={() => deleteTask(item.id)}
-                            >
-                                Delete
-                            </button>
-
-                        </div>
+                        <button
+                            className="delete-btn"
+                            onClick={() => deleteTask(item.id)}
+                        >
+                            Delete
+                        </button>
 
                     </li>
 
                 ))}
+
             </ul>
 
         </div>
